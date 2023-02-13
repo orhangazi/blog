@@ -1,13 +1,33 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min'
+import {
+  createBrowserRouter,
+  RouterProvider
+} from "react-router-dom"
+import App from './App'
+import reportWebVitals from './reportWebVitals'
+import ErrorPage from './component/ErrorPage'
+import PostCard, {loader as postCardLoader} from './component/PostCard'
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "post/:postId",
+    element: <PostCard />,
+    loader: postCardLoader
+  }
+])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 

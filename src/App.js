@@ -1,6 +1,6 @@
-import './App.css'
 import { useEffect, useState } from 'react'
 import { gapi } from 'gapi-script'
+import PostCardList from './component/PostCardList'
 
 function App() {
 
@@ -15,9 +15,9 @@ function App() {
 			// Executes an API request, and returns a Promise.
 			// The method name `language.translations.list` comes from the API discovery.
 			console.log("gapi.client: ", gapi.client)
-			console.log("gapi.client.blogger: ", gapi.client.blogger.posts.list({ blogId:"5572292692142810577", maxResult: 1}))
+			console.log("gapi.client.blogger: ", gapi.client.blogger.posts.list({ blogId:"5572292692142810577", maxResults: 10}))
 			//console.log("gapi.client.blogger.blogUserInfos: ", gapi.client.blogger.blogUserInfos.get({ blogId: "5572292692142810577"}))
-			return gapi.client.blogger.posts.list({ blogId:"5572292692142810577", maxResult: 1})
+			return gapi.client.blogger.posts.list({ blogId:"5572292692142810577", maxResults: 10})
 		}).then(function (response) {
 			console.log("sonuç: ", response.result.items)
 			setPosts(response.result.items)
@@ -33,14 +33,10 @@ function App() {
 	}, [])
 
 	return (
-		<div className="App">
-			<header className="App-header">
-				<ul>
-					{posts.map(post => <li key={post.id}>{post.title} | {new Date(post.updated).toLocaleString()}</li>)}
-				</ul>
-			</header>
+		<div className="container">
+			{posts.map(post => <PostCardList key={post.id} post={post} />)}
 		</div>
 	);
 }
 
-export default App;
+export default App
