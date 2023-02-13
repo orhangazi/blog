@@ -13,12 +13,12 @@ import PostCard, {loader as postCardLoader} from './component/PostCard'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "blog/",
     element: <App />,
     errorElement: <ErrorPage />
   },
   {
-    path: "post/:postId",
+    path: "blog/post/:postId",
     element: <PostCard />,
     loader: postCardLoader
   }
