@@ -4,11 +4,7 @@ import HtmlToReactParser from "html-to-react/lib/parser"
 import { useLoaderData, useLocation } from "react-router-dom"
 import { gapi } from "gapi-script"
 import ProfileImage from "../images/profile-image.jpg"
-
-/* export async loader = ({ params }) => {
-
-}
- */
+import { DiscussionEmbed, Recommendations } from 'disqus-react';
 
 export async function loader ({ params }) {
 	return params
@@ -66,6 +62,11 @@ var PostCard = () => {
 	const htmlToReactParser = new HtmlToReactParser()
 	const content = htmlToReactParser.parse(contentHtml)
 	const labels = post?.labels
+	let postId = post?.id
+	console.log("PostCard postId: ", postId)
+	let pageUrl = `https://orhangazi.github.io/blog/post/${postId}`
+	//original blogger url
+	let originalBloggerOriginalUrl = post?.url
 	const postTitle = post?.title
 	const authorName = post?.author.displayName
 	const updatedDate = new Date(post?.updated).toLocaleString("tr-TR", { weekday: 'long', year:"numeric", month:"long", day:"2-digit", hour:"2-digit", minute: "2-digit" })
@@ -116,7 +117,34 @@ var PostCard = () => {
 						</div>
 						<div className="card mt-3">
 							<div className="card-body">
-								<span>yarın disqusu yapacağım</span>
+								<DiscussionEmbed
+									shortname='www-orhangazi-info'
+									config={
+										{
+											url: pageUrl,
+											//url: originalBloggerOriginalUrl,
+											identifier: postId,
+											title: postTitle,
+											//language: 'zh_TW' //e.g. for Traditional Chinese (Taiwan)
+										}
+									}
+								/>
+							</div>
+						</div>
+						<div className="card mt-3">
+							<div className="card-body">
+								<Recommendations
+									shortname='www-orhangazi-info'
+									config={
+										{
+											url: pageUrl,
+											//url: originalBloggerOriginalUrl,
+											identifier: postId,
+											title: postTitle,
+											//language: 'zh_TW' //e.g. for Traditional Chinese (Taiwan)
+										}
+									}
+								/>
 							</div>
 						</div>
 					</div>
