@@ -121,7 +121,7 @@ var PostCard = () => {
 									shortname='www-orhangazi-info'
 									config={
 										{
-											url: pageUrl,
+											url: originalBloggerOriginalUrl,
 											//url: originalBloggerOriginalUrl,
 											identifier: postId,
 											title: postTitle,
@@ -137,7 +137,7 @@ var PostCard = () => {
 									shortname='www-orhangazi-info'
 									config={
 										{
-											url: pageUrl,
+											url: originalBloggerOriginalUrl,
 											//url: originalBloggerOriginalUrl,
 											identifier: postId,
 											title: postTitle,
